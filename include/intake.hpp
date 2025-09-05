@@ -9,7 +9,7 @@ class Intake {
             std::uint8_t intake_motor_port, std::uint8_t outake_motor_port
         );
 
-        void intake(); 
+        void intake(int voltage);
 
-        void outake();
+        void outake(int voltage);
 };

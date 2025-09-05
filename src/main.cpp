@@ -1,9 +1,11 @@
 #include "main.h"
 #include "lemlib/api.hpp" // IWYU pragma: keep
+#include "matchloader.hpp"
+#include "pros/misc.h"
 
 // SETUP
-pros::MotorGroup left_motors({-1, 2, -3}, pros::MotorGearset::blue); // left motors use 600 RPM cartridges
-pros::MotorGroup right_motors({4, -5, 6}, pros::MotorGearset::green); // right motors use 200 RPM cartridges
+pros::MotorGroup left_motors({-1, -4, -20}, pros::MotorGearset::blue); // left motors use 600 RPM cartridges
+pros::MotorGroup right_motors({7, 6, 3}, pros::MotorGearset::blue); // right motors use 200 RPM cartridges
 double trackwidth = 12.5;
 double wheeldiameter = lemlib::Omniwheel::NEW_325;
 // drivetrain settings
@@ -54,8 +56,10 @@ lemlib::Chassis chassis(drivetrain, // drivetrain settings
 );
 
 
+// robot subsystems
 
-
+Intake intake = Intake(10 ,16);
+MatchLoader matchloader = MatchLoader('A');
 
 
 
@@ -133,9 +137,7 @@ void autonomous() {}
  * task, not resume it from where it left off.
  */
 void opcontrol() {
-	pros::Controller master(pros::E_CONTROLLER_MASTER);
-	pros::MotorGroup left_mg({1, -2, 3});    // Creates a motor group with forwards ports 1 & 3 and reversed port 2
-	pros::MotorGroup right_mg({-4, 5, -6});  // Creates a motor group with forwards port 5 and reversed ports 4 & 6
+	pros::Controller controller(pros::E_CONTROLLER_MASTER);
 
 
 	while (true) {
@@ -144,10 +146,31 @@ void opcontrol() {
 		                 (pros::lcd::read_buttons() & LCD_BTN_RIGHT) >> 0);  // Prints status of the emulated screen LCDs
 
 		// Arcade control scheme
-		int dir = master.get_analog(ANALOG_LEFT_Y);    // Gets amount forward/backward from left joystick
-		int turn = master.get_analog(ANALOG_RIGHT_X);  // Gets the turn left/right from right joystick
-		left_mg.move(dir - turn);                      // Sets left motor voltage
-		right_mg.move(dir + turn);                     // Sets right motor voltage
+		int dir = controller.get_analog(ANALOG_LEFT_Y);    // Gets amount forward/backward from left joystick
+		int turn = controller.get_analog(ANALOG_LEFT_X);  // Gets the turn left/right from right joystick
+
+		chassis.arcade(dir, turn);
+
+        bool L1_pressed = controller.get_digital(pros::E_CONTROLLER_DIGITAL_L1);
+        bool L2_pressed = controller.get_digital(pros::E_CONTROLLER_DIGITAL_L2);
+        bool R1_pressed = controller.get_digital(pros::E_CONTROLLER_DIGITAL_R1);
+        bool R2_pressed = controller.get_digital(pros::E_CONTROLLER_DIGITAL_R2);
+        bool A_pressed = controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_A);
+
+        if (L1_pressed) {
+            intake.intake(127);
+        } else if (L2_pressed) {
+            intake.intake(-127);
+        } else intake.intake(0);
+
+        if (R1_pressed) {
+            intake.outake(127);
+        } else if (R2_pressed) {
+            intake.outake(-127);
+        } else intake.outake(0); 
+
+        if (A_pressed) matchloader.toggle();
+
 		pros::delay(20);                               // Run for 20 ms then update
 	}
 }

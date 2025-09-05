@@ -4,14 +4,12 @@
 
 class MatchLoader{
     public:
-        pros::adi::Port left_piston;
-        pros::adi::Port right_piston;
+        pros::adi::Port piston;
 
         void toggle();
 
         MatchLoader(
-            std::uint8_t left_piston_port, 
-            std::uint8_t right_piston_port
+            std::uint8_t piston_port
         );
 
 };
