@@ -58,7 +58,7 @@ lemlib::Chassis chassis(drivetrain, // drivetrain settings
 
 // robot subsystems
 
-Intake intake = Intake(10 ,16);
+Intake intake = Intake(10 ,16,15);
 MatchLoader matchloader = MatchLoader('A');
 
 
@@ -142,11 +142,11 @@ void opcontrol() {
     // loop forever
     while (true) {
         // get left y and right x positions
-        int leftY = controller.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y);
-        int rightX = controller.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_X);
+        int rightY = controller.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_Y);
+        int leftX = controller.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_X);
 
         // move the robot
-        chassis.arcade(leftY, rightX);
+        chassis.arcade(rightY, leftX);
 
         
         bool L1_pressed = controller.get_digital(pros::E_CONTROLLER_DIGITAL_L1);

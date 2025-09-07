@@ -4,9 +4,10 @@
 class Intake {
     public:
         pros::Motor intake_motor;
+        pros::Motor indexer_motor;
         pros::Motor outake_motor;
         Intake(
-            std::uint8_t intake_motor_port, std::uint8_t outake_motor_port
+            std::uint8_t intake_motor_port, std::uint8_t outake_motor_port, std::uint8_t indexer_motor_port
         );
 
         void intake(int voltage);
