@@ -139,18 +139,16 @@ void autonomous() {}
 void opcontrol() {
 	pros::Controller controller(pros::E_CONTROLLER_MASTER);
 
+    // loop forever
+    while (true) {
+        // get left y and right x positions
+        int leftY = controller.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y);
+        int rightX = controller.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_X);
 
-	while (true) {
-		pros::lcd::print(0, "%d %d %d", (pros::lcd::read_buttons() & LCD_BTN_LEFT) >> 2,
-		                 (pros::lcd::read_buttons() & LCD_BTN_CENTER) >> 1,
-		                 (pros::lcd::read_buttons() & LCD_BTN_RIGHT) >> 0);  // Prints status of the emulated screen LCDs
+        // move the robot
+        chassis.arcade(leftY, rightX);
 
-		// Arcade control scheme
-		int dir = controller.get_analog(ANALOG_LEFT_Y);    // Gets amount forward/backward from left joystick
-		int turn = controller.get_analog(ANALOG_LEFT_X);  // Gets the turn left/right from right joystick
-
-		chassis.arcade(dir, turn);
-
+        
         bool L1_pressed = controller.get_digital(pros::E_CONTROLLER_DIGITAL_L1);
         bool L2_pressed = controller.get_digital(pros::E_CONTROLLER_DIGITAL_L2);
         bool R1_pressed = controller.get_digital(pros::E_CONTROLLER_DIGITAL_R1);
@@ -171,6 +169,6 @@ void opcontrol() {
 
         if (A_pressed) matchloader.toggle();
 
-		pros::delay(20);                               // Run for 20 ms then update
+		pros::delay(25);                               // Run for 25 ms then update
 	}
 }
