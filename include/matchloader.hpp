@@ -4,7 +4,8 @@
 
 class MatchLoader{
     public:
-        pros::adi::Port piston;
+        pros::adi::DigitalOut piston;
+        bool value;
 
         void toggle();
 

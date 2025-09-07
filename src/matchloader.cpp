@@ -2,8 +2,9 @@
 
 MatchLoader::MatchLoader(
     std::uint8_t piston_port
-) : piston(piston_port){}
+) : piston(piston_port) { value = false; }
 
 void MatchLoader::toggle() {
-    piston.set_value(!piston.get_value());
+    value = !value;
+    piston.set_value(value);
 }
