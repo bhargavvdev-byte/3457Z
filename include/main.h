@@ -24,6 +24,7 @@
  * E_CONTROLLER_MASTER is pedantically correct within the PROS styleguide, but
  * not convenient for most student programmers.
  */
+#include "lemlib/chassis/chassis.hpp"
 #define PROS_USE_SIMPLE_NAMES
 
 /**
@@ -80,3 +81,8 @@ void opcontrol(void);
 #endif  // _PROS_MAIN_H_
 #include "intake.hpp"
 #include "matchloader.hpp"
+#include "autons.hpp"
+
+extern lemlib::Chassis chassis;
+extern Intake intake;
+extern MatchLoader matchloader;

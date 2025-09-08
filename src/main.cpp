@@ -13,12 +13,12 @@ lemlib::Drivetrain drivetrain(&left_motors, // left motor group
                               &right_motors, // right motor group
                               trackwidth,
                               wheeldiameter, // using new 4" omnis
-                              450, // drivetrain rpm is 360
+                              450, // drivetrain rpm is 450
                               2 // horizontal drift is 2 (for now)
 );
 
 // create an imu on port 10
-pros::Imu imu(10);
+pros::Imu imu(19);
 lemlib::OdomSensors sensors(nullptr, // vertical tracking wheel 1, set to null
                             nullptr, // vertical tracking wheel 2, set to nullptr as we are using IMEs
                             nullptr, // horizontal tracking wheel 1
@@ -90,6 +90,8 @@ void initialize() {
 	pros::lcd::set_text(1, "Hello PROS User!");
 
 	pros::lcd::register_btn1_cb(on_center_button);
+
+    chassis.calibrate();
 }
 
 /**
@@ -121,7 +123,11 @@ void competition_initialize() {}
  * will be stopped. Re-enabling the robot will restart the task, not re-start it
  * from where it left off.
  */
-void autonomous() {}
+void autonomous() {
+
+    moveforwardauto();
+
+}
 
 /**
  * Runs the operator control code. This function will be started in its own task
