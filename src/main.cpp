@@ -5,7 +5,7 @@
 
 // SETUP
 pros::MotorGroup left_motors({-1, -4, -20}, pros::MotorGearset::blue); // left motors use 600 RPM cartridges
-pros::MotorGroup right_motors({7, 6, 3}, pros::MotorGearset::blue); // right motors use 200 RPM cartridges
+pros::MotorGroup right_motors({3, 6, 5 }, pros::MotorGearset::blue); // right motors use 200 RPM cartridges
 double trackwidth = 12.5;
 double wheeldiameter = lemlib::Omniwheel::NEW_325;
 // drivetrain settings
