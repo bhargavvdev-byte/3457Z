@@ -170,7 +170,7 @@ void opcontrol() {
         if (R1_pressed) {
             intake.outake(127);
         } else if (R2_pressed) {
-            intake.outake(-127);
+            intake.outake(-70);
         } else intake.outake(0); 
 
         if (A_pressed) matchloader.toggle();
