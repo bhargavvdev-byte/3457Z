@@ -164,14 +164,19 @@ void opcontrol() {
         if (L1_pressed) {
             intake.intake(127);
         } else if (L2_pressed) {
-            intake.intake(-127/2);
+            intake.intake(-127);
         } else intake.intake(0);
 
         if (R1_pressed) {
             intake.outake(127);
         } else if (R2_pressed) {
-            intake.outake(-70);
+            intake.outake(-127);
         } else intake.outake(0); 
+
+        if (!(L1_pressed || L2_pressed || R1_pressed || R2_pressed)) {
+            intake.indexer(0);
+        }
+        
 
         if (A_pressed) matchloader.toggle();
 

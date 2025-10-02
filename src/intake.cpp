@@ -10,23 +10,33 @@ Intake::Intake(std::uint8_t intake_motor_port, std::uint8_t outake_motor_port, s
     }
 
 void Intake::intake(int voltage) {
-    if (voltage == 0) intake_motor.brake();
-
-    intake_motor.move(voltage);
-
-    if (voltage < 0) {
+    if (voltage == 0) {
+        intake_motor.brake();
+    } else if (voltage > 0) {
+        intake_motor.move(voltage);
+    } else if (voltage < 0) {
+        intake_motor.move(voltage/2);
         indexer_motor.move(voltage);
     }
 }
 
 
 void Intake::outake(int voltage) {
-    if (voltage == 0) outake_motor.brake(); indexer_motor.brake();
-
-    if (voltage<0){
-        voltage=voltage/2;
+    if (voltage == 0) {
+        outake_motor.brake();
+    } else if (voltage > 0) {
+        outake_motor.move(voltage);
+        indexer_motor.move(abs(voltage));
+    } else if (voltage < 0) {
+        outake_motor.move(-85);
+        indexer_motor.move(abs(voltage));
     }
+}
 
-    outake_motor.move(voltage);
-    indexer_motor.move(abs(voltage));
+void Intake::indexer(int voltage) {
+    if (voltage == 0) {
+        indexer_motor.brake();
+    } else {
+        indexer_motor.move(voltage);
+    }
 }

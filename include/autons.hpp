@@ -2,20 +2,5 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 void moveforwardauto();
+void red_left();

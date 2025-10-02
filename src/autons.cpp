@@ -1,7 +1,7 @@
 #include "autons.hpp"
 #include "main.h"
 
-void moveforwardauto() {
+void red_left() {
     chassis.setPose(-66.24,13.778, 90);
 
     intake.intake(127);
@@ -27,3 +27,9 @@ void moveforwardauto() {
     
 }  
    
+void moveforwardauto() {
+    //move forward
+    chassis.setPose(0, 0, 90);
+    chassis.moveToPoint(10, 0, 1200);
+    chassis.waitUntilDone();
+}
