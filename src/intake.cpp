@@ -28,7 +28,7 @@ void Intake::outake(int voltage) {
         outake_motor.move(voltage);
         indexer_motor.move(abs(voltage));
     } else if (voltage < 0) {
-        outake_motor.move(-85);
+        outake_motor.move(-50);
         indexer_motor.move(abs(voltage));
     }
 }
