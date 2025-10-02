@@ -11,9 +11,10 @@ Intake::Intake(std::uint8_t intake_motor_port, std::uint8_t outake_motor_port, s
 
 void Intake::intake(int voltage) {
     if (voltage == 0) intake_motor.brake();
+
     intake_motor.move(voltage);
 
-    if (voltage<0) {
+    if (voltage < 0) {
         indexer_motor.move(voltage);
     }
 }

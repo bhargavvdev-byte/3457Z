@@ -15,6 +15,7 @@ void moveforwardauto() {
     // move to score  middle goal  
     chassis.moveToPoint(-11.039,  11.643, 1200, {.maxSpeed=60});
     chassis.turnToHeading(315,1200);   
+    
     chassis.waitUntilDone();
     intake.outake(-700);
     chassis.waitUntilDone();

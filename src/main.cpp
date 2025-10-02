@@ -164,7 +164,7 @@ void opcontrol() {
         if (L1_pressed) {
             intake.intake(127);
         } else if (L2_pressed) {
-            intake.intake(-127);
+            intake.intake(-127/2);
         } else intake.intake(0);
 
         if (R1_pressed) {
