@@ -1,8 +1,10 @@
 #include "autons.hpp"
 #include "main.h"
 
-void red_left() {
-    chassis.setPose(-66.24,13.778, 90);
+
+   
+void moveforwardauto() {
+chassis.setPose(-66.24,13.778, 90);
 
     intake.intake(127);
 
@@ -13,9 +15,8 @@ void red_left() {
     chassis.turnToHeading(90,1200);
     chassis.waitUntilDone();
     // move to score  middle goal  
-    chassis.moveToPoint(-11.039,  11.643, 1200, {.maxSpeed=60});
-    chassis.turnToHeading(315,1200);   
-    
+    chassis.moveToPoint(-25.995,  13.212, 1200, {.maxSpeed=60});
+    chassis.turnToHeading(288,1200);   
     chassis.waitUntilDone();
     intake.outake(-700);
     chassis.waitUntilDone();
@@ -24,12 +25,4 @@ void red_left() {
  
    
     pros::delay(3000);
-    
-}  
-   
-void moveforwardauto() {
-    //move forward
-    chassis.setPose(0, 0, 90);
-    chassis.moveToPoint(10, 0, 1200);
-    chassis.waitUntilDone();
 }
